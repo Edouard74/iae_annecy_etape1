@@ -109,20 +109,7 @@ public class Catalogue implements Serializable{
 		String k = sm.nextLine();
 		Produit produitCree = new Produit(k);
 		ajouterProduit(produitCree);
-		//if(this.getProduits().get(chProd).getPrix()>=0){
-		//	ajouterProduit(produitCree);
-		//}else
-		//	System.out.println("Prix incorrect, produit non intégré dans le catalogue");
-		//}
-		//System.out.println("Produit ajouté au catalogue !\nNouveau catalogue produit :");
-		
-
-
-
-
-
-
-	}
+		}
 
 }
 		

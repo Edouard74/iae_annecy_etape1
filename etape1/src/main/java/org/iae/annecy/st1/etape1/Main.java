@@ -69,8 +69,7 @@ public class Main {
 			         System.out.println("Le fichier n'est pas créé !");
 			          p1= new Produit("001","Head First Java","Livre","",50);
 			 		  p2 = new Produit("002","ASUS 752","Ordinateur","",1800);
-			 		//p1.afficher();
-			 		//p2.afficher();
+			 		
 			 		
 			 		c1.ajouterProduit(p1);
 			 		c1.ajouterProduit(p2);
