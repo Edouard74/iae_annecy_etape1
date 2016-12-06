@@ -8,6 +8,10 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class Catalogue implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Produit>produits = new ArrayList<Produit>();
 	
 	
@@ -42,7 +46,12 @@ public class Catalogue implements Serializable{
 		}else if (chProd==2){
 			this.getProduits().get(chProd-1);
 			System.out.println ("=============Détails du produit============="+"\nRef : " + this.getProduits().get(chProd-1).getRef() + "\nDescription : " + this.getProduits().get(chProd-1).getDesc() +"\nNom : " + this.getProduits().get(chProd-1).getNom()+ "\nDescription détaillée : " + this.getProduits().get(chProd-1).getDescLongue() + "\nPrix : " + this.getProduits().get(chProd-1).getPrix() + " €.");
-		}
+		}else if(chProd ==3)
+			System.out.println("Entrez la reference Produit : ");
+			Scanner sm = new Scanner(System.in);
+			String k = sm.nextLine();
+			Produit produitCree = new Produit(k);
+			ajouterProduit(produitCree);
 			AfficherCat();
 		}
 		
@@ -110,6 +119,7 @@ public class Catalogue implements Serializable{
 		Produit produitCree = new Produit(k);
 		ajouterProduit(produitCree);
 		}
+
 
 }
 		

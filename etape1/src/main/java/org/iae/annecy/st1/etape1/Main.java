@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ import org.iae.annecy.st1.tools.ConsoleHelper;
  * 
  * @author Djer1013
  */
-public class Main {
+public class Main implements Serializable{
 
 	/**
 	 * COntroller permetant le traitement des actions d'exemple.
@@ -99,7 +100,7 @@ public class Main {
 		System.out.println("=========== Choix du produit : ============");
 		System.out.println("1: Livre");
 	    System.out.println("2: Ordinateur");
-	    
+	    System.out.println("3: Ajouter un produit");
 	    System.out.println("Votre choix ?");
 	    Scanner sc = new Scanner(System.in);
 	    int i = sc.nextInt();
