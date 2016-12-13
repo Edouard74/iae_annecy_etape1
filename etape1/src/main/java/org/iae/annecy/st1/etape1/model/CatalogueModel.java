@@ -5,7 +5,7 @@ import org.iae.annecy.st1.common.mvc.DataView;
 import org.iae.annecy.st1.common.mvc.Model;
 import org.iae.annecy.st1.etape1.model.produit.Catalogue;
 
-public class CatalogueModel implements Model{
+public class CatalogueModel{
 	
 	Catalogue cat = new Catalogue();
 	public CatalogueModel(Catalogue c){

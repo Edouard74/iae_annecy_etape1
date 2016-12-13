@@ -17,7 +17,7 @@ public interface Controller {
 	 *            Action que doit traiter le modele associé.
 	 * @return Une representation des données généré par l'action.
 	 */
-	DataView get(String actionName);
+	 DataView get(String actionName);
 
 	/**
 	 * Ajoute la compacité à ce controller de traiter une nouvelle action

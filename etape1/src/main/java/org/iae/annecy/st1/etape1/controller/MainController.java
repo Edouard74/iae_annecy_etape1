@@ -24,20 +24,20 @@ public class MainController implements Controller {
 	/**
 	 * Liste des modeles accesible via ce controller.
 	 */
-	private final transient Map<String, Model> models;
+	private transient static Map<String, Model> models = new ConcurrentHashMap<String, Model>();
 
 	/**
 	 * Initialise le stockage des modeles accesibles.
 	 */
 	public MainController() {
 		super();
-		this.models = new ConcurrentHashMap<String, Model>();
+		MainController.models = new ConcurrentHashMap<String, Model>();
 	}
 
 	/**
 	 * Check Interface. {@inheritDoc}
 	 */
-	public DataView get(final String actionName) {
+	public DataView get(String actionName) {
 		final Model model = models.get(actionName);
 		return getData(model);
 	}
@@ -45,7 +45,7 @@ public class MainController implements Controller {
 	/**
 	 * Check Interface. {@inheritDoc}
 	 */
-	public DataView get(final String actionName, DataParam params) {
+	public static DataView get(final String actionName, DataParam params) {
 		final Model model = models.get(actionName);
 		return getData(model, params);
 	}
@@ -57,13 +57,13 @@ public class MainController implements Controller {
 		models.put(name, model);
 	}
 
-	private DataView getData(final Model model) {
+	private static DataView getData(final Model model) {
 		DataView datas;
 		datas = model.get();
 		return datas;
 	}
 
-	private DataView getData(final Model model, DataParam params) {
+	private static DataView getData(final Model model, DataParam params) {
 		DataView datas;
 		datas = model.get(params);
 		return datas;
