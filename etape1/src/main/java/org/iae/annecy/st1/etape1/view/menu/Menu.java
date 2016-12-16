@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.iae.annecy.st1.tools.ConsoleHelper;
 
 public class Menu {
-	private Scanner sca = new Scanner(System.in);
+	private Scanner choixMenuGeneral = new Scanner(System.in);
 
 	public Menu() {
 	}
@@ -19,8 +19,8 @@ public class Menu {
 		ConsoleHelper.display("3: Panier client");
 		ConsoleHelper.display("4: Commande client");
 		ConsoleHelper.display("5: Quitter");
-		int m = sca.nextInt();
-		ConsoleHelper.display("Vous avez fait le choix : " + m);
-		return m;
+		int menuChoisi = choixMenuGeneral.nextInt();
+		ConsoleHelper.display("Vous avez fait le choix : " + menuChoisi);
+		return menuChoisi;
 	}
 }

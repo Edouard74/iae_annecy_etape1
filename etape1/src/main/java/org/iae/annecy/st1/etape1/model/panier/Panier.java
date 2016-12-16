@@ -100,7 +100,7 @@ public class Panier {
 			switch (this.getClient().getCodePromotionnel()) {
 			case 0:
 				ConsoleHelper.display("Malheureusement, vous n'avez pas de réduction !");
-				ConsoleHelper.display("TOTAL PANIER : " + total + "€.");
+				ConsoleHelper.display("TOTAL PANIER : " + total + " €.");
 				break;
 			case 5:
 				reduction = (5 * total) / 100;
@@ -116,10 +116,10 @@ public class Panier {
 		}
 	}
 
-//************************ MENU PANIER *******************************
+//************************ AFFICHAGE MENU PANIER *******************************
 
 	public int affichageMenuPanier() {
-		Scanner sca = new Scanner(System.in);
+		Scanner scanPanier = new Scanner(System.in);
 		ConsoleHelper.display("");
 		ConsoleHelper.display("=========== MENU PANIER : ============");
 		ConsoleHelper.display("");
@@ -128,7 +128,7 @@ public class Panier {
 		ConsoleHelper.display("3: Récapitulatif panier");
 		ConsoleHelper.display("4: Valider le panier");
 		ConsoleHelper.display("5: Fermer votre session et quitter");
-		int m = sca.nextInt();
+		int m = scanPanier.nextInt();
 		ConsoleHelper.display("Vous avez fait le choix : " + m);
 		return m;
 	}
@@ -136,7 +136,7 @@ public class Panier {
 //************************* MENU PANIER GENERAL ***************************
 
 	public void menuPanier(Catalogue monCata) {
-		Scanner sca = new Scanner(System.in);
+		Scanner scanChoixPanier = new Scanner(System.in);
 		int m = this.affichageMenuPanier();
 		String reference;
 		Panier panierDetail = new Panier();
@@ -149,12 +149,12 @@ public class Panier {
 				m = this.affichageMenuPanier();
 			} else if (m == 2) {
 				ConsoleHelper.display("Entrer la ref produit souhaité :");
-				reference = sca.next();
+				reference = scanChoixPanier.next();
 				if (monCata.retrieve(reference) != null) {
 					if (this.retrieve(reference) == null) {
 						produitTrouvePanier = monCata.retrieve(reference);
 						ConsoleHelper.display("Entrez la quantité souhaitée :");
-						quantite = sca.nextInt();
+						quantite = scanChoixPanier.nextInt();
 						produitTrouvePanier.setQuantite(quantite);
 						this.remplirPanier(produitTrouvePanier);
 						this.setValidationCommande(false);
@@ -174,7 +174,7 @@ public class Panier {
 			} else if (m == 4) {
 				if (this.isValidationCommande() == false) {
 					ConsoleHelper.display("Valider la commande: 1:Oui / 2:Non");
-					int valider = sca.nextInt();
+					int valider = scanChoixPanier.nextInt();
 					if (valider == 1) {
 						this.setValidationCommande(true);
 						ConsoleHelper.display("Commande validée !");

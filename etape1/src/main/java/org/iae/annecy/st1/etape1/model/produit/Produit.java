@@ -20,10 +20,6 @@ public class Produit implements Serializable {
 		return quantite;
 	}
 
-	public void setQuantite(int quantite) {
-		this.quantite = quantite;
-	}
-
 	public String getDesc() {
 		return desc;
 	}
@@ -43,7 +39,11 @@ public class Produit implements Serializable {
 	public void setRef(String ref) {
 		this.ref = ref;
 	}
-
+	
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
+	
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}

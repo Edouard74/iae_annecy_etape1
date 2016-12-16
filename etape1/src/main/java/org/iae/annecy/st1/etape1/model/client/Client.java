@@ -14,7 +14,7 @@ public class Client implements Serializable {
 	private int numeroClient, codePromotionnel;
 
 //*************** GETTERS ET SETTERS ****************
-	
+
 	public String getNom() {
 		return nom;
 	}
@@ -46,7 +46,7 @@ public class Client implements Serializable {
 	public void setCodePromotionnel(int codePromotionnel) {
 		this.codePromotionnel = codePromotionnel;
 	}
-	
+
 //************************** CONSTRUCTEUR ***************************	
 
 	public Client() {
@@ -62,7 +62,8 @@ public class Client implements Serializable {
 //********************** AFFICHAGE D'UN CLIENT ************************
 
 	public void afficherClient() {
-		ConsoleHelper.display("Nom : " + this.getNom() + "		Prénom : " + this.getPrenom() + "		Numéro Client : "
-				+ this.getNumeroClient() + "	Code promotionnel : " + this.getCodePromotionnel() + " %.");
+		ConsoleHelper
+				.display("Nom : " + this.getNom() + "		Prénom : " + this.getPrenom() + "		Numéro Client : "
+						+ this.getNumeroClient() + "	Code promotionnel : " + this.getCodePromotionnel() + " %.");
 	}
 }

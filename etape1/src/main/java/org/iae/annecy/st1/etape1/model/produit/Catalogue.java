@@ -43,38 +43,6 @@ public class Catalogue implements Serializable {
 		}
 	}
 
-//****************************** MODIFICATION DU PRODUIT *****************************
-
-	public void modifAttribut(int i, int j) {
-		Scanner sc = new Scanner(System.in);
-		/*
-		 * if (j==1){ ConsoleHelper.display("Entrez la nouvelle référence :");
-		 * String d = sc.nextLine(); this.getProduits().get(i-1).setRef(d);
-		 * }else
-		 */
-		if (j == 1) {
-			ConsoleHelper.display("Entrez la nouvelle description :");
-			String d = sc.nextLine();
-			this.getProduits().get(i - 1).setDesc(d);
-			this.afficherProduitModifie(i);
-		} else if (j == 2) {
-			ConsoleHelper.display("Entrez le nouveau nom :");
-			String t = sc.nextLine();
-			this.getProduits().get(i - 1).setNom(t);
-			this.afficherProduitModifie(i);
-		} else if (j == 3) {
-			ConsoleHelper.display("Entrez la nouvelle description longue :");
-			String r = sc.next();
-			this.getProduits().get(i - 1).setDescLongue(r);
-			this.afficherProduitModifie(i);
-		} else if (j == 4) {
-			ConsoleHelper.display("Entrez le nouveau prix :");
-			Float f = sc.nextFloat();
-			this.getProduits().get(i - 1).setPrix(f);
-			this.afficherProduitModifie(i);
-		}
-	}
-
 //************************ RECHERCHE D'UN PRODUIT PAR LA REF ******************************
 
 	public Produit retrieve(String ref) {
@@ -105,33 +73,33 @@ public class Catalogue implements Serializable {
 //*************************** AJOUT PRODUIT DANS LE CATALOGUE ******************************
 
 	public void creerProduit() {
-		Scanner sm = new Scanner(System.in);
-		ConsoleHelper.display("Entrez la référence Produit : ");
-		String ref = sm.next();
+		Scanner choixAjout = new Scanner(System.in);
+		ConsoleHelper.display("Créez la référence Produit : ");
+		String ref = choixAjout.next();
 		if (this.retrieve(ref) == null) {
 			ConsoleHelper.display("Entrez le prix : ");
-			Float pr = sm.nextFloat();
-			if (pr >= 0) {
+			Float prix = choixAjout.nextFloat();
+			if (prix >= 0) {
 				ConsoleHelper.display("Entrez le nom : ");
-				String n = sm.next();
+				String nom = choixAjout.next();
 				ConsoleHelper.display("Entrez la description : ");
-				String de = sm.next();
+				String description = choixAjout.next();
 				ConsoleHelper.display("Entrez la description longue : ");
-				String del = sm.next();
-				Produit produitCree = new Produit(ref, n, de, del, pr);
+				String descriptionLongue = choixAjout.next();
+				Produit produitCree = new Produit(ref, nom, description, descriptionLongue, prix);
 				ajouterProduit(produitCree);
 			} else {
-				ConsoleHelper.display("le prix doit être positif !!");
+				ConsoleHelper.display("le prix ne peut pas être négatif !!");
 			}
 		} else {
 			ConsoleHelper.display("le produit existe deja !!");
 		}
 	}
 
-//************************ MENU AFFICHAGE RESPONSABLE PRODUIT **********************************
+//************************ AFFICHAGE MENU PRODUIT **********************************
 
-	public int menuGen() {
-		Scanner sca = new Scanner(System.in);
+	public int menuProduit() {
+		Scanner choixMenuProduit = new Scanner(System.in);
 		ConsoleHelper.display("");
 		ConsoleHelper.display("====================== INTERFACE CATALOGUE PRODUIT : ===================");
 		ConsoleHelper.display("");
@@ -140,30 +108,30 @@ public class Catalogue implements Serializable {
 		ConsoleHelper.display("3: Modifier un produit");
 		ConsoleHelper.display("4: Ajouter un produit");
 		ConsoleHelper.display("5: Enregistrer et quitter");
-		int m = sca.nextInt();
-		ConsoleHelper.display("Vous avez fait le choix : " + m);
-		return m;
+		int menuProduitChoisi = choixMenuProduit.nextInt();
+		ConsoleHelper.display("Vous avez fait le choix : " + menuProduitChoisi);
+		return menuProduitChoisi;
 	}
 	
 //******************* MENU AFFICHAGE MODIFICATION PRODUIT *************************************	
 
 	public int menuModif() {
-		Scanner sca = new Scanner(System.in);
+		Scanner choixModifProduit = new Scanner(System.in);
 		ConsoleHelper.display("======== MENU MODIFICATION : =========");
 		ConsoleHelper.display("1: Modif description");
 		ConsoleHelper.display("2: Modif nom");
 		ConsoleHelper.display("3: Modif description longue");
 		ConsoleHelper.display("4: Modif prix");
-		int n = sca.nextInt();
-		ConsoleHelper.display("Vous avez fait le choix : " + n);
-		return n;
+		int modifProduitChoisi = choixModifProduit.nextInt();
+		ConsoleHelper.display("Vous avez fait le choix : " + modifProduitChoisi);
+		return modifProduitChoisi;
 	}
 
 //**************************** MENU CATALOGUE PRODUIT ****************************************
 	
 	public void menuGeneral() {
-		Scanner sca = new Scanner(System.in);
-		int m = this.menuGen();
+		Scanner choixGeneralProduit = new Scanner(System.in);
+		int m = this.menuProduit();
 		Produit proddetail = new Produit();
 		while (m < 5) {
 			if (m == 1) {
@@ -171,11 +139,11 @@ public class Catalogue implements Serializable {
 				ConsoleHelper.display("=== Voici le catalogue produit : ===");
 				ConsoleHelper.display("");
 				afficherCat();
-				m = this.menuGen();
+				m = this.menuProduit();
 			} else if (m == 2) {
 				ConsoleHelper.display("Entrer une référence (ex: 001 ou 002) :");
-				Scanner stef = new Scanner(System.in);
-				String ref = stef.nextLine();
+				Scanner choixDetail = new Scanner(System.in);
+				String ref = choixDetail.nextLine();
 				proddetail = this.retrieve(ref);
 				if (proddetail != null) {
 					ConsoleHelper.display("==== Produit trouvé ! voici ses caratéristiques : ====");
@@ -184,45 +152,48 @@ public class Catalogue implements Serializable {
 				} else {
 					ConsoleHelper.display("Produit non trouvé ! Créer ce produit.");
 				}
-				m = this.menuGen();
+				m = this.menuProduit();
 			} else if (m == 3) {
 				this.afficherCat();
+				ConsoleHelper.display("");
 				ConsoleHelper.display("Entrer le numero du produit a modifier :");
 				ConsoleHelper.display("");
-				int i = sca.nextInt();
+				int i = choixGeneralProduit.nextInt();
 				int n = this.menuModif();
 				/*
-				 * if (j==1){
+				 * if (n==1){
 				 * ConsoleHelper.display("Entrez la nouvelle référence :");
-				 * String d = sc.nextLine();
+				 * String d = sca.next();
 				 * this.getProduits().get(i-1).setRef(d); }else
 				 */
 				if (n == 1) {
 					ConsoleHelper.display("Entrez la nouvelle description :");
-					String d = sca.next();
-					this.getProduits().get(i - 1).setDesc(d);
+					String description = choixGeneralProduit.next();
+					this.getProduits().get(i - 1).setDesc(description);
 					this.afficherProduitModifie(i);
 				} else if (n == 2) {
 					ConsoleHelper.display("Entrez le nouveau nom :");
-					String t = sca.next();
-					this.getProduits().get(i - 1).setNom(t);
+					String nom = choixGeneralProduit.next();
+					this.getProduits().get(i - 1).setNom(nom);
 					this.afficherProduitModifie(i);
 				} else if (n == 3) {
 					ConsoleHelper.display("Entrez la nouvelle description longue :");
-					String r = sca.next();
-					this.getProduits().get(i - 1).setDescLongue(r);
+					String descriptionLongue = choixGeneralProduit.next();
+					this.getProduits().get(i - 1).setDescLongue(descriptionLongue);
 					this.afficherProduitModifie(i);
 				} else if (n == 4) {
 					ConsoleHelper.display("Entrez le nouveau prix :");
-					Float f = sca.nextFloat();
-					this.getProduits().get(i - 1).setPrix(f);
+					Float prix = choixGeneralProduit.nextFloat();
+					this.getProduits().get(i - 1).setPrix(prix);
 					this.afficherProduitModifie(i);
 				}
-				m = this.menuGen();
+				m = this.menuProduit();
 			} else if (m == 4) {
 				ConsoleHelper.display("ajouter un produit :");
 				creerProduit();
-				m = this.menuGen();
+				ConsoleHelper.display("");
+				ConsoleHelper.display("====== Produit créé !! ======");
+				m = this.menuProduit();
 			}
 		}
 
@@ -234,7 +205,8 @@ public class Catalogue implements Serializable {
 			out.writeObject(this);
 			out.close();
 			fichier.close();
-			ConsoleHelper.display("Catalogue de produits sauvegardé !");
+			ConsoleHelper.display("");
+			ConsoleHelper.display("=== Catalogue de produits sauvegardé ! ===");
 		} catch (IOException i1) {
 			i1.printStackTrace();
 		}
